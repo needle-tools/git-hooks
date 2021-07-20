@@ -1,0 +1,5 @@
+﻿projects/**/Library
+projects/**/Temp
+projects/**/Logs
+projects/**/.idea
+projects/**/obj
