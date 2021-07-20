@@ -13,7 +13,7 @@ internal static class InstallHooks
 		Install(false);
 	}
 
-	[MenuItem("Help/Needle/Install Git Hooks")]
+	[MenuItem("Tools/Needle/Install Git Hooks 👌")]
 	private static void Install()
 	{
 		Install(true);
