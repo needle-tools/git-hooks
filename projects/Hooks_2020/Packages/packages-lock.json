@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.needle.hooks": {
+    "com.needle.git-hooks": {
       "version": "file:../../../package",
       "depth": 0,
       "source": "local",

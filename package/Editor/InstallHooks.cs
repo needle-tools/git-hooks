@@ -6,7 +6,7 @@ using UnityEngine;
 [InitializeOnLoad]
 internal static class InstallHooks
 {
-	private const string packageName = "com.needle.hooks";
+	private const string packageName = "com.needle.git-hooks";
 
 	static InstallHooks()
 	{

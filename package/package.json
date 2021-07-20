@@ -1,5 +1,5 @@
 {
-    "name": "com.needle.hooks",
-    "displayName": "Needle Hooks",
+    "name": "com.needle.git-hooks",
+    "displayName": "Git Hooks",
     "version": "0.0.1-pre"
 }
