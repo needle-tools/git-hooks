@@ -10,30 +10,52 @@ internal static class InstallHooks
 
 	static InstallHooks()
 	{
-		var hooks = GetHooks();
-		if (hooks.Count <= 0) return;
+		Install(false);
+	}
+
+	[MenuItem("Help/Needle/Install Git Hooks")]
+	private static void Install()
+	{
+		Install(true);
+	}
+
+	private static void Install(bool log)
+	{
+		var hooks = GetHooks(log);
+		if (hooks.Count <= 0)
+		{
+			if (log) Debug.Log("No hooks found to install");
+			return;
+		}
 		var projectFolder = Application.dataPath;
 		var dir = new DirectoryInfo(projectFolder);
-		while (dir.Parent != null && !TryInstallHooks(dir, hooks))
+		
+		while (dir.Parent != null )
 		{
+			if (TryInstallHooks(log, dir, hooks))
+			{
+				break;
+			}
 			dir = dir.Parent;
 		}
 	}
 
-	private static bool TryInstallHooks(DirectoryInfo dir, List<FileInfo> hooks)
+	private static bool TryInstallHooks(bool log, DirectoryInfo dir, List<FileInfo> hooks)
 	{
 		if (!Directory.Exists(dir.FullName + "/.git")) return false;
 
 		var hooksDir = dir.FullName + "/.git/hooks";
+		if (log)
+			Debug.Log("<b>Found git hooks directory</b>: " + hooksDir);
+		
 		if (!Directory.Exists(hooksDir)) Directory.CreateDirectory(hooksDir);
-		// Debug.Log("Found " + hooksDir);
 		foreach (var hook in hooks)
 		{
 			if (!hook.Exists) continue;
 			var dest = new FileInfo(hooksDir + "/" + hook.Name);
-			if (!dest.Exists || dest.Length != hook.Length)
+			if (log || !dest.Exists || dest.Length != hook.Length)
 			{
-				Debug.Log("<b>Installed git hook</b>: " + hook.Name + "\nFrom:" + hook.FullName + "\nTo:" + dest?.FullName);
+				Debug.Log("<b>Installed git hook</b>: " + hook.Name + "\n<b>From</b>: " + hook.FullName + "\n<b>To</b>: " + dest.FullName);
 			}
 
 			File.Copy(hook.FullName, dest.FullName, true);
@@ -42,9 +64,10 @@ internal static class InstallHooks
 		return true;
 	}
 
-	private static List<FileInfo> GetHooks()
+	private static List<FileInfo> GetHooks(bool log = false)
 	{
 		var hooksFolderPath = $"Packages/{packageName}/Hooks";
+		if (log) Debug.Log("<b>Search hooks</b> in " + hooksFolderPath);
 		var files = Directory.GetFiles(hooksFolderPath, "*", SearchOption.AllDirectories);
 		var hooks = new List<FileInfo>();
 		foreach (var file in files)
