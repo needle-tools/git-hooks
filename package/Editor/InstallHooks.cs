@@ -68,7 +68,7 @@ internal static class InstallHooks
 	{
 		var hooksFolderPath = $"Packages/{packageName}/Hooks";
 		if (log) Debug.Log("<b>Search hooks</b> in " + hooksFolderPath);
-		var files = Directory.GetFiles(hooksFolderPath, "*", SearchOption.AllDirectories);
+		var files = Directory.GetFiles(hooksFolderPath, "*", SearchOption.TopDirectoryOnly);
 		var hooks = new List<FileInfo>();
 		foreach (var file in files)
 		{
