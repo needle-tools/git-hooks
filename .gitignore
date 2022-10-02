@@ -3,3 +3,6 @@ projects/**/Temp
 projects/**/Logs
 projects/**/.idea
 projects/**/obj
+projects/**/*.csproj
+projects/**/*.sln
+projects/**/*.csproj
