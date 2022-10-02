@@ -1,5 +1,24 @@
 {
     "name": "com.needle.git-hooks",
-    "displayName": "Git Hooks",
-    "version": "0.0.1-pre"
+    "displayName": "Needle Git Hooks",
+    "version": "0.1.0-pre",
+    "author": {
+        "name": "Needle",
+        "email": "hi@needle.tools",
+        "url": "https://needle.tools"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/needle-tools/git-hooks.git"
+    },
+    "unity": "2020.3",
+    "description": "Automatically installs a git pre-commit hook to prevent commits with very large files",
+    "keywords": [
+        "utility",
+        "git",
+        "editor"
+    ],
+    "type": "tool",
+    "dependencies": {},
+    "samples": []
 }
